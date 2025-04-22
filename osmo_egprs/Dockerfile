@@ -3,8 +3,7 @@
 #
 FROM pcu-example as osmo_egprs
 ARG DEBIAN_FRONTEND=noninteractive
-ADD libresdr_b210.bin
-/usr/share/uhd/images/usrp_b210_fpga.bin
+ADD libresdr_b210.bin /usr/share/uhd/images/usrp_b210_fpga.bin
 WORKDIR /etc/osmocom
 ADD /scripts/entrypoint.sh /entrypoint.sh
 ADD /configs/operator /etc/osmocom/.

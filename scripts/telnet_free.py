@@ -15,7 +15,8 @@ async def main():
 
         reply.append(c)
     t1 = "write n_id_cell "
-    t2 = str(random.randrange(0,255))
+    t2 = str(0)
+    #t2 = str(random.randrange(0,255))
     t3 = "\n"
     text = t1 + t2 + t3
     writer.write(text)
@@ -32,7 +33,8 @@ async def main():
 
 
     t1 = "write cell_id "
-    t2 = str(random.randrange(0,65025))
+    t2 = str(0)
+    #t2 = str(random.randrange(0,65025))
     t3 = "\n"
     text = t1 + t2 + t3
     writer.write(text)
@@ -48,6 +50,16 @@ async def main():
 
         reply.append(c)
     writer.write("write use_cnfg_file 1\n")
+    while True:
+        c = await reader.read(1)
+        if not c:
+            break
+
+        if c in ['\r', '\n']:
+            break
+
+        reply.append(c)
+    writer.write("write n_ant 2\n")
 
     while True:
         c = await reader.read(1)
@@ -120,7 +132,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write rx_gain 30\n")
+    writer.write("write rx_gain 80\n")
 
     while True:
         c = await reader.read(1)
@@ -132,7 +144,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write tx_gain 90\n")
+    writer.write("write tx_gain 100\n")
 
     while True:
         c = await reader.read(1)

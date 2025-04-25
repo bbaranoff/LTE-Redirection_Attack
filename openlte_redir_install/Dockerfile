@@ -54,7 +54,7 @@ RUN cd polarssl && git checkout 47431b6 && mkdir build && cd build && cmake .. &
 RUN git clone https://git.code.sf.net/p/openlte/code openlte
 ADD uhd.patch /opt/GSM
 RUN mv uhd.patch /opt/GSM/openlte
-RUN cd openlte && git checkout 4bd673b && patch -p1 < uhd.patch && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
+RUN cd openlte && git checkout a5a66e && patch -p1 < uhd.patch && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
 
 RUN pip3 install requests

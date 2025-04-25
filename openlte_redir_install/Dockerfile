@@ -51,10 +51,10 @@ RUN cd gr-osmosdr &&  git checkout gr3.7 && mkdir build && cd build && cmake .. 
 RUN git clone  https://github.com/cuberite/polarssl
 RUN cd polarssl && git checkout 47431b6 && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
-RUN git clone https://github.com/bbaranoff/openlte
+RUN git clone https://git.code.sf.net/p/openlte/code openlte
 ADD uhd.patch /opt/GSM
 RUN mv uhd.patch /opt/GSM/openlte
-RUN cd openlte && patch -p1 < uhd.patch
+RUN cd openlte && git checkout 792fa7 && patch -p1 < uhd.patch
 RUN cd openlte && git checkout 4bd673b && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
 

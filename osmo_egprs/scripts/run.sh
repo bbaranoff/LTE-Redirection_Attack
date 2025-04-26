@@ -1,1 +1,3 @@
-./osmo-all.sh start
+./tun.sh
+./runonce.sh
+tmux && osmo-trx-uhd

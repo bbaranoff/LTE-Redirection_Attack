@@ -34,7 +34,6 @@ sudo docker compose up --build -d
 cd $MYPATH/asterisk/
 sudo docker compose up --build -d
 cd $MYPATH/scripts
-echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash 2G.sh; exec bash"
 cd $MYPATH/scripts
@@ -42,5 +41,7 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH/scripts
+echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+sudo bash forward.sh
 telnet 172.17.0.2 30001
 

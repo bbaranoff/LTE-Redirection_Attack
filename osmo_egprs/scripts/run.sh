@@ -1,3 +1,3 @@
 ./tun.sh
 ./runonce.sh
-tmux && osmo-trx-uhd
+osmo-trx-uhd

@@ -130,7 +130,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write rx_gain 50\n")
+    writer.write("write rx_gain 30\n")
 
     while True:
         c = await reader.read(1)
@@ -142,18 +142,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write tx_gain 50\n")
-    while True:
-        c = await reader.read(1)
-        if not c:
-            break
-
-        if c in ['\r', '\n']:
-            break
-
-        reply.append(c)
-
-    writer.write("start\n")
+    writer.write("write tx_gain 80\n")
 
     while True:
         c = await reader.read(1)

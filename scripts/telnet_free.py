@@ -15,8 +15,7 @@ async def main():
 
         reply.append(c)
     t1 = "write n_id_cell "
-    t2 = str(0)
-    #t2 = str(random.randrange(0,255))
+    t2 = str(random.randrange(0,255))
     t3 = "\n"
     text = t1 + t2 + t3
     writer.write(text)
@@ -33,8 +32,7 @@ async def main():
 
 
     t1 = "write cell_id "
-    t2 = str(0)
-    #t2 = str(random.randrange(0,65025))
+    t2 = str(random.randrange(0,65025))
     t3 = "\n"
     text = t1 + t2 + t3
     writer.write(text)
@@ -132,7 +130,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write rx_gain 80\n")
+    writer.write("write rx_gain 50\n")
 
     while True:
         c = await reader.read(1)

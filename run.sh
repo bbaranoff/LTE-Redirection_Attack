@@ -44,5 +44,6 @@ cd $MYPATH/scripts
 sleep 3
 echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 sudo bash forward.sh
+sudo bash srsepc_if_masq enp114s0
 telnet 172.17.0.2 30001
 

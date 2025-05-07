@@ -11,7 +11,8 @@ fi
 pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
-
+sudo systemctl restart networkd-dispatcher
+sudo systemctl restart docker
 myuser=$(who am i | awk '{print $1}')
 sudo bash srsran_performance
 read -p "Forwarding Interface, device ? " interface
@@ -43,7 +44,5 @@ gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH/scripts
 sleep 3
 echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
-sudo bash forward.sh
-sudo bash srsepc_if_masq.sh enp114s0
-telnet 172.17.0.2 30001
+telnet 0 30001
 

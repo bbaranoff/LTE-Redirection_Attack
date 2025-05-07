@@ -20,9 +20,9 @@
 +// dcs1800
 +liblte_value_2_bits(0, &msg_ptr, 1);
 +// Choice of following ARFCN
-+liblte_value_2_bits(0, &msg_ptr, 2);
++liblte_value_2_bits(514, &msg_ptr, 2);
 +// explicit list
-+liblte_value_2_bits(1, &msg_ptr, 5);
++liblte_value_2_bits(514, &msg_ptr, 5);
 +// arfcn no.
 +liblte_value_2_bits(514, &msg_ptr, 10);
 +// Note that total bits should be octet aligned,

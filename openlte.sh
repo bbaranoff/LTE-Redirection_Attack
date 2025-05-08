@@ -4,4 +4,4 @@ MYPATH=$PWD
 popd > /dev/null
 
 cd openlte_redir_install
-sudo docker compose up -d
+sudo docker compose up -d --force-recreate

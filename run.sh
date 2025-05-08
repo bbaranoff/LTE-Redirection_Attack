@@ -42,7 +42,10 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH/scripts
-sleep 3
+sleep 5
+sudo dhclient -r
+sudo ip route flush all
+sudo dhclient
 echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 telnet 0 30001
 

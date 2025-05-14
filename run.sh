@@ -48,5 +48,6 @@ sudo ip route flush all
 sudo dhclient
 echo nameserver 176.16.32.0 | sudo tee /etc/resolv.conf
 echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+sudo bash dns_forward_route.sh
 telnet 0 30001
 

@@ -5,4 +5,4 @@ sudo sysctl -w net.ipv6.conf.all.forwarding=1
 sudo ip route del default
 sudo ip route add default via 192.168.1.254 dev enp114s0
 echo nameserver 172.16.32.0 | sudo tee /etc/resolv.conf
-echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+echo nameserver 8.8.8.8 | sudo tee -a /etc/resolv.conf

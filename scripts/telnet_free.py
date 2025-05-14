@@ -78,7 +78,7 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write ip_addr_start b0102001\n")
+    writer.write("write ip_addr_start 0a80118\n")
 
     while True:
         c = await reader.read(1)

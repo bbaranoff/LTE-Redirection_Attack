@@ -19,12 +19,13 @@ sudo modprobe gtp
 sudo systemctl restart networkd-dispatcher
 sudo systemctl stop udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 sudo systemctl restart docker
+sudo bash init_pyenv.sh
 cd $MYPATH/osmo_egprs/
-sudo docker compose up --build -d
+sudo docker compose up --force-recreate --build -d
 cd $MYPATH/redirect_4_2g
-sudo docker compose up --build -d
+sudo docker compose up --force-recreate --build -d
 cd $MYPATH/asterisk/
-sudo docker compose up --build -d
+sudo docker compose up --force-recreate --build -d
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash 2G.sh; exec bash"
 cd $MYPATH/scripts
@@ -32,13 +33,12 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
-sudo bash resset_tables.sh
 sudo bash dns_forward.sh
 sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1
 EOF
-telnet 0 30001
+telnet 172.17.0.2 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

@@ -12,7 +12,6 @@ pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
 
-sudo bash reset_tables.sh
 sudo systemctl restart docker
 sudo dhclient -r
 sudo dhclient

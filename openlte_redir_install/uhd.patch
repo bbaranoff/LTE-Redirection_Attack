@@ -1,37 +1,5 @@
---- openlte_v00-20-05/liblte/src/liblte_rrc.cc	2016-10-09 22:17:50.000000000 +0200
-+++ openlte_v00-20-05/liblte/src/liblte_rrc.cc	2022-01-25 17:14:32.613323868 +0100
-@@ -11698,13 +11698,28 @@
-         liblte_value_2_bits(0, &msg_ptr, 2);
- 
-         // Optional indicators
--        liblte_value_2_bits(0, &msg_ptr, 1);
-+        liblte_value_2_bits(1, &msg_ptr, 1);
-         liblte_value_2_bits(0, &msg_ptr, 1);
-         liblte_value_2_bits(0, &msg_ptr, 1);
- 
-         // Release cause
-         liblte_value_2_bits(con_release->release_cause, &msg_ptr, 2);
- 
-+// redirectedcarrierinfo
-+// geran // choice
-+liblte_value_2_bits(1, &msg_ptr, 4);
-+// arfcn no.
-+liblte_value_2_bits(514, &msg_ptr, 10);
-+// dcs1800
-+liblte_value_2_bits(0, &msg_ptr, 1);
-+// Choice of following ARFCN
-+liblte_value_2_bits(0, &msg_ptr, 2);
-+// explicit list
-+liblte_value_2_bits(1, &msg_ptr, 5);
-+// arfcn no.
-+liblte_value_2_bits(514, &msg_ptr, 10);
-+// Note that total bits should be octet aligned,
-+// if not, pad it with zeros.
-         // Fill in the number of bits used
-         msg->N_bits = msg_ptr - msg->msg;
- 
---- openlte_v00-20-05/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2017-07-29 21:58:37.000000000 +0200
-+++ openlte_v00-20-05/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2022-01-25 16:49:13.365515919 +0100
+--- openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-16 22:33:13.867543305 +0000
++++ openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-16 22:34:43.323999279 +0000
 @@ -106,6 +106,7 @@
      // Message Parsers
      void parse_attach_complete(LIBLTE_BYTE_MSG_STRUCT *msg, LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
@@ -49,8 +17,9 @@
      void send_authentication_reject(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
      void send_authentication_request(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
      void send_detach_accept(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
---- openlte_v00-20-05/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2017-07-29 22:03:51.000000000 +0200
-+++ openlte_v00-20-05/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2022-01-25 16:49:13.365515919 +0100
+
+--- openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-16 22:33:13.867543305 +0000
++++ openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-16 22:34:43.323999279 +0000
 @@ -99,18 +99,21 @@
  typedef enum{
      LTE_FDD_ENB_MME_PROC_IDLE = 0,
@@ -82,8 +51,8 @@
                                                                                      "AUTHENTICATE",
                                                                                      "AUTH REJECTED",
                                                                                      "ENABLE SECURITY",
---- openlte_v00-20-05/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2017-07-29 22:15:50.000000000 +0200
-+++ openlte_v00-20-05/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2022-01-25 17:07:55.380027792 +0100
+--- openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-16 22:33:13.868543311 +0000
++++ openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-16 22:34:43.323999279 +0000
 @@ -204,6 +204,10 @@
          case LIBLTE_MME_MSG_TYPE_ATTACH_REQUEST:
              parse_attach_request(msg, &nas_msg->user, &nas_msg->rb);
@@ -193,15 +162,20 @@
      attach_rej.esm_msg_present     = false;
      attach_rej.t3446_value_present = false;
      liblte_mme_pack_attach_reject_msg(&attach_rej, &msg);
-
---- openlte_v00-20-05/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2017-07-29 22:18:34.000000000 +0200
-+++ openlte_v00-20-05/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2022-01-25 17:09:37.116388236 +0100
+--- openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-16 22:33:13.868543311 +0000
++++ openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-16 22:34:43.323999279 +0000
+@@ -1,4 +1,4 @@
+-#line 2 "LTE_fdd_enb_radio.cc" // Make __FILE__ omit the path
++// Make __FILE__ omit the path
+ /*******************************************************************************
+ 
+     Copyright 2013-2017 Ben Wojtowicz
 @@ -229,7 +229,7 @@
      try
      {
          // Setup the USRP
 -        if(devs[idx-1]["type"] == "x300")
-+        if(devs[idx-1]["type"] == "soapy")
++        if(devs[idx-1]["type"] == "uhd")
          {
              devs[idx-1]["master_clock_rate"] = "184320000";
              master_clock_set                 = true;
@@ -240,4 +214,37 @@
          next_tx_ts            = rx_ts + radio_params->samp_rate; // 1 second to make sure everything is setup
          metadata_rx.flags     = 0;
          metadata_rx.timestamp = next_tx_ts - (radio_params->N_samps_per_subfr*2); // Retard RX by 2 subframes
+
+--- openlte/liblte/src/liblte_rrc.cc	2025-05-16 22:33:13.865543295 +0000
++++ openlte/liblte/src/liblte_rrc.cc	2025-05-16 22:34:43.322999274 +0000
+@@ -11698,13 +11698,28 @@
+         liblte_value_2_bits(0, &msg_ptr, 2);
+ 
+         // Optional indicators
+-        liblte_value_2_bits(0, &msg_ptr, 1);
++        liblte_value_2_bits(1, &msg_ptr, 1);
+         liblte_value_2_bits(0, &msg_ptr, 1);
+         liblte_value_2_bits(0, &msg_ptr, 1);
+ 
+         // Release cause
+         liblte_value_2_bits(con_release->release_cause, &msg_ptr, 2);
+ 
++// redirectedcarrierinfo
++// geran // choice
++liblte_value_2_bits(1, &msg_ptr, 4);
++// arfcn no.
++liblte_value_2_bits(514, &msg_ptr, 10);
++// dcs1800
++liblte_value_2_bits(0, &msg_ptr, 1);
++// Choice of following ARFCN
++liblte_value_2_bits(0, &msg_ptr, 2);
++// explicit list
++liblte_value_2_bits(1, &msg_ptr, 5);
++// arfcn no.
++liblte_value_2_bits(514, &msg_ptr, 10);
++// Note that total bits should be octet aligned,
++// if not, pad it with zeros.
+         // Fill in the number of bits used
+         msg->N_bits = msg_ptr - msg->msg;
+ 
 

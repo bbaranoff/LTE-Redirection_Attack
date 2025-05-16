@@ -2,7 +2,7 @@ import asyncio
 import telnetlib3
 import random
 async def main():
-    reader, writer = await telnetlib3.open_connection('0', 30000)
+    reader, writer = await telnetlib3.open_connection('172.17.0.2', 30000)
 
     reply = []
     while True:
@@ -128,6 +128,18 @@ async def main():
 
         reply.append(c)
 
+    writer.write("write bandwidth 20\n")
+
+    while True:
+        c = await reader.read(1)
+        if not c:
+            break
+
+        if c in ['\r', '\n']:
+            break
+
+        reply.append(c)
+
     writer.write("write tracking_area_code 6601\n")
 
     while True:
@@ -152,7 +164,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write tx_gain 100\n")
+    writer.write("write tx_gain 80\n")
 
     while True:
         c = await reader.read(1)

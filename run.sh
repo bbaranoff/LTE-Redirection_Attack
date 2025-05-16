@@ -36,8 +36,8 @@ sudo bash resset_tables.sh
 sudo bash dns_forward.sh
 sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
-nameserver 8.8.8.8
-nameserver 8.8.4.4
+nameserver 1.1.1.1
+nameserver 1.0.0.1
 EOF
 telnet 0 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket

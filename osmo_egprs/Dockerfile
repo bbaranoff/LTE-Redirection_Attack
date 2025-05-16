@@ -10,7 +10,6 @@ ADD /configs/operator /etc/osmocom/.
 ADD /scripts/*.sh /etc/osmocom/.
 RUN sed -i -e 's/network-online.target/nss-lookup.target/g' /lib/systemd/system/osmo-*.service
 RUN sed -i -e 's/ser=osmocom/ser=root/g' /lib/systemd/system/osmo-*.service
-RUN cp apn0.service /lib/systemd/system/apn0.service
 ADD /configs/*.cfg /etc/osmocom/.
 ADD /scripts/.config /etc/osmocom/.
 ADD /configs/osmo-mgw.service /lib/systemd/system/.

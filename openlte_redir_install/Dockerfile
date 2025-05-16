@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /opt/GSM/
 RUN apt update
 RUN apt install -y build-essential libgmp-dev libx11-6 libx11-dev\
- flex libncurses5 libncurses5-dev libncursesw5 libpcsclite-dev\
+ libcurl4-openssl-dev curl flex libncurses5 libncurses5-dev libncursesw5 libpcsclite-dev\
  zlib1g-dev libmpfr6 libmpc3 lemon aptitude libtinfo-dev libtool\
  shtool autoconf git-core pkg-config make libmpfr-dev libmpc-dev\
  libtalloc-dev libfftw3-dev libgnutls28-dev libssl-dev libtool-bin\
@@ -24,7 +24,7 @@ RUN pip install requests
 #Clone or download the necessary repositories :
 
 RUN git clone https://github.com/ettusresearch/uhd
-RUN cd uhd/host && git checkout dbaf4132f && mkdir build && cd build && cmake -DENABLE_PYTHON3=OFF .. && make -j16 && make install && ldconfig
+RUN cd uhd/host && git checkout v3.15.0.0-rc3 && mkdir build && cd build && cmake -DENABLE_PYTHON3=OFF .. && make -j16 && make install && ldconfig
 RUN apt install wget software-properties-common -y
 RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | apt-key add -
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
@@ -32,7 +32,7 @@ RUN apt-get update
 RUN apt install cmake -y
 
 RUN git clone https://github.com/nuand/BladeRF
-RUN cd BladeRF && mkdir build && cd build && cmake -DENABLE_PYTHON3=ON -DPYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3 .. && make -j$N && make install && ldconfig
+RUN cd BladeRF && git checkout libbladeRF_v2.4.1 && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
 RUN git clone https://github.com/pothosware/SoapySDR
 RUN cd SoapySDR && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig

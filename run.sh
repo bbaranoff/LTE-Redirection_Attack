@@ -11,43 +11,34 @@ fi
 pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
-sudo systemctl restart networkd-dispatcher
-sudo systemctl restart docker
 myuser=$(who am i | awk '{print $1}')
 sudo bash srsran_performance
-#read -p "Forwarding Interface, device ? " interface
-#sudo bash srsepc_if_masq.sh interface
-#read -p "Forwarding Interface, ip ? " ipin
-#sudo sed -i -e "s/0 remote ip 127.0.0.1/0 remote ip `echo $ipin`/g" osmo_egprs/configs/osmo-bsc.cfg
-#sudo sed -i -e "s/listen 127.0.0.1/listen `echo $ipin`/g" osmo_egprs/configs/osmo-sgsn.cfg
-#read -p "Restart docker: [Y/n]: " restart_docker
-#if [ -z $restart_docker ]; then restart_docker="Y";fi
-#if [ $restart_docker != "n" ]; then sudo systemctl restart docker;fi
-#cd $MYPATH
-sudo udevadm trigger
 sudo ./choose_interface.sh
+sudo udevadm trigger
 sudo modprobe gtp
+sudo systemctl restart networkd-dispatcher
 sudo systemctl stop udev systemd-udevd-control.socket systemd-udevd-kernel.socket
+sudo systemctl restart docker
 cd $MYPATH/osmo_egprs/
-sudo docker compose up --build -d --no-cache
+sudo docker compose up --build -d
 cd $MYPATH/redirect_4_2g
 sudo docker compose up --build -d
 cd $MYPATH/asterisk/
 sudo docker compose up --build -d
-cd $MYPATH/scripts
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash 2G.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
-cd $MYPATH/scripts
-sleep 5
-sudo dhclient -r
-sudo ip route flush all
-sudo dhclient
-echo nameserver 176.16.32.0 | sudo tee /etc/resolv.conf
-echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
-sudo bash dns_forward_route.sh
+cd $MYPATH
+sudo bash resset_tables.sh
+sudo bash dns_forward.sh
+sudo bash srsepc_if_masq.sh $(cat interface)
+cat <<EOF > /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+EOF
 telnet 0 30001
+sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

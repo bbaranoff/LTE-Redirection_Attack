@@ -9,7 +9,8 @@ WORKDIR /opt/GSM
 RUN apt update
 RUN apt install -y libedit-dev libfftw3-dev libusb-1.0-0-dev nano git liburing-dev libtool cmake autoconf make wget gcc g++ libpcsclite-dev pcsc-tools pcscd \
  cpufrequtils libsctp-dev libconfig++-dev libconfig-dev libmbedtls-dev libtalloc-dev libgnutls28-dev libmnl-dev libortp-dev libdbd-sqlite3 iproute2 tmux \
- iputils-ping libsqlite3-dev libtalloc-dev libgnutls28-dev libmnl-dev libortp-dev libdbi-dev libc-ares-dev libsofia-sip-ua-glib-dev telnet libuhd-dev uhd-host
+ iputils-ping libsqlite3-dev libtalloc-dev libortp-dev libdbi-dev libc-ares-dev libsofia-sip-ua-glib-dev telnet libuhd-dev uhd-host \
+ python3-six python3-mako python3-lxml python3-lxml python3-numpy python3-numpy python3-pip git python3-pybind11 libsndfile1-dev
 RUN apt install -y --no-install-recommends systemd systemd-sysv dbus dbus-user-session
 RUN apt install -y autoconf automake build-essential ccache cmake cpufrequtils doxygen ethtool \
 g++ git inetutils-tools libboost-all-dev libncurses5 libncurses5-dev libusb-1.0-0 libusb-1.0-0-dev \

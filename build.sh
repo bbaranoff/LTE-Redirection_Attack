@@ -4,7 +4,7 @@
 #
 
 
-sudo apt install chromium-browser docker.io docker-compose-v2 kconfig-frontends docker-buildx xterm shellinabox libbladerf2 tmux -y
+sudo apt install docker.io docker-compose-v2 kconfig-frontends docker-buildx xterm shellinabox libbladerf2 tmux containerd -y
 if [ ! -z $(ls .config 2>/dev/null) ] ; then
   mv .config .config.old;
 fi

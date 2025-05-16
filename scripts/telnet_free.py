@@ -78,17 +78,6 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write ip_addr_start 0a80118\n")
-
-    while True:
-        c = await reader.read(1)
-        if not c:
-            break
-
-        if c in ['\r', '\n']:
-            break
-
-        reply.append(c)
     writer.write("write mcc 208\n")
 
     while True:

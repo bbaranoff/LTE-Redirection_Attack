@@ -14,6 +14,19 @@ async def main():
             break
 
         reply.append(c)
+    text = "ip_addr_start 0a000001"
+    writer.write(text)
+    reply = []
+
+    while True:
+        c = await reader.read(1)
+        if not c:
+            break
+
+        if c in ['\r', '\n']:
+            break
+
+        reply.append(c)
     t1 = "write n_id_cell "
     t2 = str(random.randrange(0,255))
     t3 = "\n"

@@ -34,8 +34,6 @@ cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
 for i in $(ls /sys/class/net/) ; do /usr/bin/ip l del dev $i ; done
-sudo bash dns_forward.sh
-sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1

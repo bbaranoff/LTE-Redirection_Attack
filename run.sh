@@ -40,6 +40,8 @@ cat <<EOF > /etc/resolv.conf
 nameserver 1.1.1.1
 nameserver 1.0.0.1
 EOF
+sudo bash dns_forward.sh
+
 telnet 0 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

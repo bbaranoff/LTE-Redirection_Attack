@@ -14,9 +14,7 @@ async def main():
             break
 
         reply.append(c)
-    text = "ip_addr_start 0a000001"
-    writer.write(text)
-    reply = []
+    writer.write("write n_ant 1\n")
 
     while True:
         c = await reader.read(1)
@@ -70,7 +68,7 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write n_ant 2\n")
+    writer.write("write n_ant 1\n")
     while True:
         c = await reader.read(1)
         if not c:

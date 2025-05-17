@@ -4,7 +4,7 @@
 #
 
 echo "Have fun..."
-sudo docker run -it -d -v /dev:/dev --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2g-example LTE_fdd_enodeb
+sudo docker run -it --net=host -d -v /dev:/dev --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2g-example LTE_fdd_enodeb
 pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
@@ -23,4 +23,4 @@ python3 telnet_bouygues.py
 elif [[ -n $(grep lyca=y operator) ]];then
 python3 telnet_bouygues.py
 fi
-telnet 172.17.0.2 30000
+telnet 0 30000

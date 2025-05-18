@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/nirvana/LTE-Redirection_Attack/scripts/myenv
+set -gx VIRTUAL_ENV /home/nirvana/LTE-Redirection_attack/scripts/myenv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

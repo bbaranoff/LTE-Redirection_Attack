@@ -2,7 +2,7 @@ import asyncio
 import telnetlib3
 import random
 async def main():
-    reader, writer = await telnetlib3.open_connection('172.17.0.2', 30000)
+    reader, writer = await telnetlib3.open_connection('0', 30000)
 
     reply = []
     while True:
@@ -67,8 +67,7 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write dns_addr 08080808\n")
-
+    writer.write("write ip_addr_start 0a010101\n")
     while True:
         c = await reader.read(1)
         if not c:
@@ -78,8 +77,8 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write mcc 208\n")
 
+    writer.write("write mcc 208\n")
     while True:
         c = await reader.read(1)
         if not c:

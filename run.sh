@@ -38,6 +38,9 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
+for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i ; fi;done
+dhclient -r
+dhclient
 sudo bash dns_forward.sh
 #sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
@@ -47,6 +50,6 @@ EOF
 
 
 
-telnet 172.17.0.2 30001
+telnet 0 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

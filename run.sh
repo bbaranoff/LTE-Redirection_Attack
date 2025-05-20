@@ -38,8 +38,8 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
-sudo bash reset_tables.sh
-sudo bash srsepc_if_masq.sh $(cat interface)
+sudo bash dns_forward.sh
+#sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
 nameserver 192.168.1.254
 nameserver 212.27.40.240

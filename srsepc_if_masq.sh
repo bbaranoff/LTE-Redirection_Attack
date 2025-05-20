@@ -33,4 +33,4 @@ fi
 echo "Masquerading Interface "$1
 
 echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward 1>/dev/null
-sudo iptables -t nat -A POSTROUTING -o $1 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o enp114s0 -j MASQUERADE

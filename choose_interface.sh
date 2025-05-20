@@ -8,7 +8,6 @@ sed -i -e '/^#/d' .config
 sed -i -e 's/CONFIG_//g' .config
 sed -i -e 's/=y//g' .config
 mv .config operator
-ip route flush all
 for i in $(ls /sys/class/net/) ; do /usr/bin/ip l del dev $i ; done
 dhclient -r
 dhclient

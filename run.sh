@@ -13,19 +13,24 @@ MYPATH=$PWD
 popd > /dev/null
 myuser=$(who am i | awk '{print $1}')
 sudo bash srsran_performance
-sudo ./choose_interface.sh
 sudo udevadm trigger
 sudo modprobe gtp
+sudo ./choose_interface.sh
 sudo systemctl restart networkd-dispatcher
 sudo systemctl stop udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 sudo systemctl restart docker
 sudo bash init_pyenv.sh
+sudo dhclient -r
+sudo dhclient
 cd $MYPATH/osmo_egprs/
 sudo docker compose up --force-recreate --build -d
 cd $MYPATH/redirect_4_2g
 sudo docker compose up --force-recreate --build -d
 cd $MYPATH/asterisk/
 sudo docker compose up --force-recreate --build -d
+cd  $MYPATH
+
+
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash 2G.sh; exec bash"
 cd $MYPATH/scripts
@@ -33,12 +38,15 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
-sudo bash dns_forward.sh
+sudo bash reset_tables.sh
 sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
-nameserver 1.1.1.1
-nameserver 1.0.0.1
+nameserver 192.168.1.254
+nameserver 212.27.40.240
 EOF
+
+
+
 telnet 172.17.0.2 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

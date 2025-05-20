@@ -8,7 +8,9 @@ sed -i -e '/^#/d' .config
 sed -i -e 's/CONFIG_//g' .config
 sed -i -e 's/=y//g' .config
 mv .config operator
-for i in $(ls /sys/class/net/) ; do /usr/bin/ip l del dev $i ; done
+
+for i in $(ls /sys/class/net/) ; do if [ $i != "apn0" ]; then /usr/bin/ip l del dev $i; fi ; done
+
 dhclient -r
 dhclient
 ip -o link show | awk -F': ' '{print $2}' > interfaces

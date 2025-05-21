@@ -19,6 +19,7 @@ sudo ./choose_interface.sh
 sudo systemctl restart networkd-dispatcher
 sudo systemctl stop udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 sudo systemctl restart docker
+cd $MYPATH
 sudo bash init_pyenv.sh
 sudo dhclient -r
 sudo dhclient
@@ -38,14 +39,12 @@ gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
+for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 sudo bash dns_forward.sh
 #sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
 nameserver 192.168.1.254
 EOF
-for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
-
-
 telnet 0 30001
 sudo systemctl start udev systemd-udevd-control.socket systemd-udevd-kernel.socket
 

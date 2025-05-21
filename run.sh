@@ -42,7 +42,6 @@ sudo bash dns_forward.sh
 #sudo bash srsepc_if_masq.sh $(cat interface)
 cat <<EOF > /etc/resolv.conf
 nameserver 192.168.1.254
-nameserver 212.27.40.240
 EOF
 for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 

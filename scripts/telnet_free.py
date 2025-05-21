@@ -67,7 +67,7 @@ async def main():
             break
 
         reply.append(c)
-    writer.write("write dns_addr 08080808\n")
+    writer.write("write ip_addr_start 0a000001\n")
 
     while True:
         c = await reader.read(1)
@@ -165,6 +165,17 @@ async def main():
         reply.append(c)
 
     writer.write("write tx_gain 80\n")
+
+    while True:
+        c = await reader.read(1)
+        if not c:
+            break
+
+        if c in ['\r', '\n']:
+            break
+
+        reply.append(c)
+    writer.write("write clock_source external\n")
 
     while True:
         c = await reader.read(1)

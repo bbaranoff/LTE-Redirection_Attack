@@ -164,7 +164,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write tx_gain 80\n")
+    writer.write("write tx_gain 100\n")
 
     while True:
         c = await reader.read(1)

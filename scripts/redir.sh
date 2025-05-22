@@ -9,9 +9,6 @@ pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
 cd $MYPATH
-python3 -m venv myenv
-source myenv/bin/activate
-pip3 install telnetlib3
 if [[ -n $(grep orange=y operator) ]];then
 python3 telnet_orange.py
 elif [[ -n $(grep sfr=y operator) ]];then

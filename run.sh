@@ -50,7 +50,8 @@ for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l de
 sudo bash dns_forward.sh
 
 # Put gateway IP in /etc/resolv.conf
-route=$(ip r | grep ^def | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])')
+echo $(ip r | grep ^def | cat testr | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
+route=$(sed 's/ .*//g' route)
 cat <<EOF > /etc/resolv.conf
 nameserver $route
 EOF

@@ -1,5 +1,9 @@
 old_route=$(cat route)
-route=$(ip r | grep ^def | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])')
+
+# Put gateway IP in /etc/resolv.conf
+echo $(ip r | grep ^def | cat testr | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
+route=$(sed 's/ .*//g' route)
+
 echo $route > route
 bash ./tun.sh
 operator=$(cat operator)

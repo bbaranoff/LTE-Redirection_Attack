@@ -1,7 +1,7 @@
 old_route=$(cat route)
 
 # Put gateway IP in /etc/resolv.conf
-echo $(ip r | grep ^def | cat testr | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
+echo $(ip r | grep ^def | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
 route=$(sed 's/ .*//g' route)
 
 echo $route > route

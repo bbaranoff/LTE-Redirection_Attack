@@ -54,4 +54,5 @@ cat <<EOF > /etc/resolv.conf
 nameserver $route
 EOF
 
-sudo ip r add 192.168.1.23 via 176.16.32.0
+#sudo ip r add 192.168.1.23 via 176.16.32.0
+rm -r scripts/myenv

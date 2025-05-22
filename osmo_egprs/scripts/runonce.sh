@@ -1,3 +1,4 @@
+sleep 2
 old_route=$(cat route)
 
 # Put gateway IP in /etc/resolv.conf

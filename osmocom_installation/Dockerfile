@@ -50,6 +50,10 @@ RUN git clone https://github.com/osmocom/osmo-msc
 RUN cd /opt/GSM/osmo-msc && autoreconf -fi && ./configure --enable-smpp --enable-iu && make -j$N  && make install && ldconfig
 RUN git clone https://github.com/osmocom/osmo-bsc
 RUN cd /opt/GSM/osmo-bsc && autoreconf -fi && ./configure --enable-iu && make -j$N  && make install && ldconfig
+RUN git clone https://github.com/osmocom/osmo-trx
+RUN cd /opt/GSM/osmo-trx && autoreconf -fi && ./configure --with-uhd && make -j$N  && make install && ldconfig
+RUN git clone https://github.com/osmocom/osmo-bts
+RUN cd /opt/GSM/osmo-bts && autoreconf -fi && ./configure --enable-bts && make -j$N  && make install && ldconfig
 RUN git clone https://github.com/osmocom/osmo-sip-connector
 RUN apt install iptables python3-pip udev -y
 RUN cd /opt/GSM/osmo-sip-connector && autoreconf -fi && ./configure && make -j$N  && make install && ldconfig

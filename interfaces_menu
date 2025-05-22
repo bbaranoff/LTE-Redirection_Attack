@@ -31,4 +31,16 @@ config br-f35a5b375f12
         bool
         prompt "Interface br-f35a5b375f12"
         select interface
+config br-865d00e7f185
+        bool
+        prompt "Interface br-865d00e7f185"
+        select interface
+config br-d4520ebf0118
+        bool
+        prompt "Interface br-d4520ebf0118"
+        select interface
+config veth898279a
+        bool
+        prompt "Interface veth898279a"
+        select interface
 endchoice

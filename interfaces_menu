@@ -1,0 +1,18 @@
+choice
+prompt "Network interface"
+        default interface
+        help
+          Specify the interface you will use to forward internet with OSMOCOM
+config lo
+        bool
+        prompt "Interface lo"
+        select interface
+config enp114s0
+        bool
+        prompt "Interface enp114s0"
+        select interface
+config wlp0s20f3
+        bool
+        prompt "Interface wlp0s20f3"
+        select interface
+endchoice

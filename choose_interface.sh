@@ -10,8 +10,6 @@ sed -i -e 's/=y//g' .config
 cp .config osmo_egprs/configs/operator
 mv .config scripts/operator
 
-for i in $(ls /sys/class/net/) ; do if [ $i != "apn0" ]; then /usr/bin/ip l del dev $i; fi ; done
-
 dhclient -r
 dhclient
 ip -o link show | awk -F': ' '{print $2}' > interfaces

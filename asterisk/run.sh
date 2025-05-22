@@ -1,5 +1,5 @@
 #! /bin/sh
-session="EGPRS"
+session="Asterisk"
 window="$session:0"
 if [ $(tmux attach -t "$session" )]; then
   exit 0

@@ -55,6 +55,3 @@ cat <<EOF > /etc/resolv.conf
 nameserver $route
 EOF
 
-
-telnet 0 30001
-

@@ -31,10 +31,11 @@ if [ $(tmux attach -t "$session" )]; then
 fi
 tmux new-session -d -s "$session"
 window=0
-tmux rename-window -t $session:$window 'Log'
+tmux rename-window -t $window 'Log'
 tmux send-keys -t $window "telnet 0 30001" C-m
 window=1
 tmux new-window -t $seesion:$window -n 'Main'
 tmux send-keys -t $window "telnet 0 30000" C-m
 tmux attach -t "$session"
 
+rm -r myenv

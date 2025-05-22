@@ -1,3 +1,3 @@
 cd asterisk
 docker compose up
-docker tag asterisk-example asterisk-example:latest
+docker tag asterisk-app asterisk-example:latest

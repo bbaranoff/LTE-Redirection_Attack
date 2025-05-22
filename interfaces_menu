@@ -15,4 +15,20 @@ config wlp0s20f3
         bool
         prompt "Interface wlp0s20f3"
         select interface
+config docker0
+        bool
+        prompt "Interface docker0"
+        select interface
+config br-9a725ccc08bc
+        bool
+        prompt "Interface br-9a725ccc08bc"
+        select interface
+config br-69c4dc2c56ce
+        bool
+        prompt "Interface br-69c4dc2c56ce"
+        select interface
+config br-f35a5b375f12
+        bool
+        prompt "Interface br-f35a5b375f12"
+        select interface
 endchoice

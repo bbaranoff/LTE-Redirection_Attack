@@ -1,6 +1,13 @@
-#
 # Copyright 2025  by Bastien Baranoff
 #
 services:
-  example:
-    build: .
+  app:
+    build:
+        context: .
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+

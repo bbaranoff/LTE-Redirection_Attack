@@ -1,7 +1,7 @@
 #
 # Copyright 2024  by Penthertz (Bastien Baranoff)
 #
-FROM osmocom_installation-example as osmo_egprs
+FROM osmocom_installation-app as osmo_egprs
 ARG DEBIAN_FRONTEND=noninteractive
 ADD libresdr_b210.bin /usr/share/uhd/images/usrp_b210_fpga.bin
 WORKDIR /etc/osmocom

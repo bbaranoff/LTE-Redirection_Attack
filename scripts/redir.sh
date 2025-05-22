@@ -9,15 +9,18 @@ pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
 cd $MYPATH
-if [[ -n $(grep orange=y operator) ]];then
+operator=$(cat operator)
+source myenv/bin/activate
+if [[ $operator = "orange" ]];then
 python3 telnet_orange.py
-elif [[ -n $(grep sfr=y operator) ]];then
+fi
+if [[ $operator = "sfr" ]];then
 python3 telnet_sfr.py
-elif [[ -n$(grep free=y operator) ]];then
+fi
+if [[ $operator = "free" ]];then
 python3 telnet_free.py
-elif [[ -n $(grep bouygues=y operator) ]];then
-python3 telnet_bouygues.py
-elif [[ -n $(grep lyca=y operator) ]];then
+fi
+if [[ $operator = "bouygues" ]];then
 python3 telnet_bouygues.py
 fi
 telnet 0 30000

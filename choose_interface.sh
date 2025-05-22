@@ -7,7 +7,8 @@ kconfig-mconf run_menu
 sed -i -e '/^#/d' .config
 sed -i -e 's/CONFIG_//g' .config
 sed -i -e 's/=y//g' .config
-mv .config osmo_egprs/configs/operator
+cp .config osmo_egprs/configs/operator
+mv .config scripts/operator
 
 for i in $(ls /sys/class/net/) ; do if [ $i != "apn0" ]; then /usr/bin/ip l del dev $i; fi ; done
 

@@ -19,8 +19,4 @@ config bouygues
         bool
         prompt "Bouygues Télécom"
         select operator
-config lyca
-        bool
-        prompt "LycaMobile"
-        select operator
 endchoice

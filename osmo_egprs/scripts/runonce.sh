@@ -3,19 +3,19 @@ route=$(ip r | grep ^def | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(
 echo $route > route
 bash ./tun.sh
 operator=$(cat operator)
-if [[ $operator == "free" ]];then
+if [[ $operator = "free" ]];then
 sed -i -e "s/network code .*/network code 15/g" /etc/osmocom/osmo-bsc.cfg
 sed -i -e "s/network code .*/network code 15/g" /etc/osmocom/osmo-msc.cfg
 fi
-if [[ $operator == "bouygues" ]];then
+if [[ $operator = "bouygues" ]];then
 sed -i -e "s/network code .*/network code 20/g" /etc/osmocom/osmo-bsc.cfg
 sed -i -e "s/network code .*/network code 20/g" /etc/osmocom/osmo-msc.cfg
 fi
-if [[ $operator == "sfr" ]];then
+if [[ $operator = "sfr" ]];then
 sed -i -e "s/network code .*/network code 10/g" /etc/osmocom/osmo-bsc.cfg
 sed -i -e "s/network code .*/network code 10/g" /etc/osmocom/osmo-msc.cfg
 fi
-if [[ $operator == "orange" ]];then
+if [[ $operator = "orange" ]];then
 sed -i -e "s/network code .*/network code 01/g" /etc/osmocom/osmo-bsc.cfg
 sed -i -e "s/network code .*/network code 01/g" /etc/osmocom/osmo-msc.cfg
 fi

@@ -15,10 +15,10 @@ myuser=$(who am i | awk '{print $1}')
 sudo bash srsran_performance
 sudo udevadm trigger
 sudo modprobe gtp
+for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 sudo ./choose_interface.sh
 sudo systemctl restart networkd-dispatcher
 sudo systemctl stop udev systemd-udevd-control.socket systemd-udevd-kernel.socket
-for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 sudo systemctl restart docker
 sudo bash init_pyenv.sh
 sudo dhclient -r
@@ -44,7 +44,7 @@ gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 cd $MYPATH
 for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 sudo bash dns_forward.sh
-#sudo bash srsepc_if_masq.sh $(cat interface)
+
 route=$(ip r | grep ^def | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])')
 cat <<EOF > /etc/resolv.conf
 nameserver $route

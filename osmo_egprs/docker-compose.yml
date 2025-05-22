@@ -9,4 +9,4 @@ services:
 
 networks:
   my_network:
-    driver: host
+    driver: bridge

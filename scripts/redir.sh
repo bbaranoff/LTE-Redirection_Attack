@@ -23,4 +23,18 @@ fi
 if [[ $operator = "bouygues" ]];then
 python3 telnet_bouygues.py
 fi
-telnet 0 30000
+
+#! /bin/sh
+session="eNodeB Redirection"
+if [ $(tmux attach -t "$session" )]; then
+  exit 0
+fi
+tmux new-session -d -s "$session"
+window=0
+tmux rename-window -t $session:$window 'Log'
+tmux send-keys -t $window "telnet 0 30001" C-m
+window=1
+tmux new-window -t $seesion:$window -n 'Main'
+tmux send-keys -t $window "telnet 0 30000" C-m
+tmux attach -t "$session"
+

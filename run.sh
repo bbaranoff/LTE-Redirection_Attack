@@ -39,6 +39,7 @@ sudo docker compose up --force-recreate --build -d
 # Execute Dockers
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash 2G.sh; exec bash"
+sleep 1
 cd $MYPATH/scripts
 gnome-terminal -- bash -c "bash redir.sh; exec bash"
 cd $MYPATH/scripts

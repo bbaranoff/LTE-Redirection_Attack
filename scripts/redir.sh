@@ -26,7 +26,7 @@ fi
 
 #! /bin/sh
 session="eNodeB Redirection"
-if [ $(tmux attach -t "$session" )]; then
+if [[ $(tmux attach -t "$session") ]]; then
   exit 0
 fi
 tmux new-session -d -s "$session"

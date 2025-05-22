@@ -18,8 +18,6 @@ sudo bash srsran_performance
 sudo udevadm trigger
 sudo modprobe gtp
 
-for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
-
 sudo ./choose_interface.sh
 
 sudo systemctl restart docker
@@ -47,7 +45,6 @@ gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 
 cd $MYPATH
 rm interface
-for i in $(ls /sys/class/net/) ; do if [[ $i != "apn0" ]]; then /usr/bin/ip l del dev $i; fi ; done
 sudo bash dns_forward.sh
 
 # Put gateway IP in /etc/resolv.conf
@@ -57,3 +54,4 @@ cat <<EOF > /etc/resolv.conf
 nameserver $route
 EOF
 
+sudo ip r add 192.168.1.23 via 176.16.32.0

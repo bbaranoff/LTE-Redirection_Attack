@@ -158,7 +158,7 @@
      }
  
 -    attach_rej.emm_cause           = user->get_emm_cause();
-+    attach_rej.emm_cause           = 2;
++    attach_rej.emm_cause           = 17;
      attach_rej.esm_msg_present     = false;
      attach_rej.t3446_value_present = false;
      liblte_mme_pack_attach_reject_msg(&attach_rej, &msg);

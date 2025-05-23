@@ -4,7 +4,7 @@
 #
 
 echo "Have fun..."
-sudo docker run -it -d -v /dev:/dev --net host --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2g-app LTE_fdd_enodeb
+sudo docker run -it -d -v /dev:/dev --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2g-app LTE_fdd_enodeb
 pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null
@@ -32,10 +32,10 @@ fi
 tmux new-session -d -s "$session"
 window=0
 tmux rename-window -t $window 'Log'
-tmux send-keys -t $window "telnet 0 30001" C-m
+tmux send-keys -t $window "telnet 172.17.0.2 30001" C-m
 window=1
 tmux new-window -t $seesion:$window -n 'Main'
-tmux send-keys -t $window "telnet 0 30000" C-m
+tmux send-keys -t $window "telnet 172.17.0.2 30000" C-m
 tmux attach -t "$session"
 
 rm -r myenv

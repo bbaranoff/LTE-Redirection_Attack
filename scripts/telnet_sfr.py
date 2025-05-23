@@ -2,7 +2,7 @@ import asyncio
 import telnetlib3
 import random
 async def main():
-    reader, writer = await telnetlib3.open_connection('0', 30000)
+    reader, writer = await telnetlib3.open_connection('172.17.0.1', 30000)
 
     reply = []
     while True:

@@ -1,0 +1,46 @@
+diff -ru srsran_4g/srsenb/hdr/stack/rrc/rrc_ue.h srsRAN_4G/srsenb/hdr/stack/rrc/rrc_ue.h
+--- srsran_4g/srsenb/hdr/stack/rrc/rrc_ue.h	2025-02-22 20:09:52.322901097 +0100
++++ srsRAN_4G/srsenb/hdr/stack/rrc/rrc_ue.h	2025-02-22 19:47:05.403275912 +0100
+@@ -173,7 +173,7 @@
+   unique_rnti_ptr<rrc_mobility> mobility_handler;
+   unique_rnti_ptr<rrc_endc>     endc_handler;
+ 
+-  bool is_csfb = false;
++  bool is_csfb = true;
+ 
+ private:
+   srsran::unique_timer activity_timer; // for basic DL/UL activity timeout
+ 
+-----------------------------------------------------------------------------------------
+
+--- sib.conf	2025-02-22 19:27:26.655341495 +0100
++++ /home/nirvana/srsRAN_4G/srsenb/sib.conf.example	2025-02-08 18:23:31.647589687 +0100
+@@ -20,7 +20,7 @@
+             si_periodicity = 16;
+ 
+             // comma-separated array of SIB-indexes (from 3 to 13), leave empty or commented to just scheduler sib2
+-            si_mapping_info = [ 7 ];
++            si_mapping_info = [ 3 ];
+         }
+     );
+     system_info_value_tag = 0;
+@@ -287,16 +287,16 @@
+     carrier_freqs_info_list =
+     (
+         {
+-            cell_resel_prio = 1;
++            cell_resel_prio = 0;
+             ncc_permitted = 255;
+             q_rx_lev_min = 0;
+             thresh_x_high = 2;
+             thresh_x_low = 2;
+ 
+-            start_arfcn = 514;
++            start_arfcn = 871;
+             band_ind = "dcs1800";
+             explicit_list_of_arfcns = (
+-                514
++                871
+             );
+         }
+     );

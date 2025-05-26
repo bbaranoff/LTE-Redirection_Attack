@@ -21,8 +21,6 @@ sudo modprobe gtp
 sudo ./choose_interface.sh
 
 sudo systemctl restart docker
-
-sudo bash init_pyenv.sh
 sudo dhclient -r
 sudo dhclient
 
@@ -45,14 +43,13 @@ gnome-terminal -- bash -c "bash asterisk.sh; exec bash"
 
 cd $MYPATH
 rm interface
-sudo bash dns_forward.sh
 
 # Put gateway IP in /etc/resolv.conf
-echo $(ip r | grep ^def | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
-route=$(sed 's/ .*//g' route)
-cat <<EOF > /etc/resolv.conf
-nameserver $route
-EOF
+#echo $(ip r | grep ^def | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
+#route=$(sed 's/ .*//g' route)
+#cat <<EOF > /etc/resolv.conf
+#nameserver $route
+#EOF
 
 #sudo ip r add 192.168.1.23 via 176.16.32.0
-rm -r scripts/myenv
+sudo bash dns_forward.sh

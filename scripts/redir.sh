@@ -10,7 +10,10 @@ MYPATH=$PWD
 popd > /dev/null
 cd $MYPATH
 operator=$(cat operator)
+python3 -m venv myenv
 source myenv/bin/activate
+python3 -m pip install telnetlib3
+cd $MYPATH
 if [[ $operator = "orange" ]];then
 python3 telnet_orange.py
 fi
@@ -23,7 +26,6 @@ fi
 if [[ $operator = "bouygues" ]];then
 python3 telnet_bouygues.py
 fi
-
 #! /bin/sh
 session="eNodeB Redirection"
 if [[ $(tmux attach -t "$session") ]]; then
@@ -33,9 +35,6 @@ tmux new-session -d -s "$session"
 window=0
 tmux rename-window -t $window 'Log'
 tmux send-keys -t $window "telnet 172.17.0.2 30001" C-m
-window=1
-tmux new-window -t $seesion:$window -n 'Main'
-tmux send-keys -t $window "telnet 172.17.0.2 30000" C-m
 tmux attach -t "$session"
-
+cd $MYPATH
 rm -r myenv

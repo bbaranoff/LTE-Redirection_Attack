@@ -1,4 +1,4 @@
---- openlte-orig/liblte/src/liblte_rrc.cc	2025-05-27 17:44:15.723612693 +0200
+--- openlte/liblte/src/liblte_rrc.cc	2025-05-27 17:44:15.723612693 +0200
 +++ openlte/liblte/src/liblte_rrc.cc	2025-05-27 17:42:21.530090207 +0200
 @@ -11698,13 +11698,28 @@
          liblte_value_2_bits(0, &msg_ptr, 2);
@@ -30,7 +30,7 @@
          // Fill in the number of bits used
          msg->N_bits = msg_ptr - msg->msg;
  
---- openlte-orig/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 17:44:15.717612666 +0200
+--- openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 17:44:15.717612666 +0200
 +++ openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 19:31:55.760090132 +0200
 @@ -1,4 +1,4 @@
 -/*******************************************************************************
@@ -86,7 +86,7 @@
                                                                                      "REJECT",
                                                                                      "AUTHENTICATE",
                                                                                      "AUTH REJECTED",
---- openlte-orig/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 17:44:15.718612670 +0200
+--- openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 17:44:15.718612670 +0200
 +++ openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 19:29:50.434938074 +0200
 @@ -201,9 +201,13 @@
          case LIBLTE_MME_MSG_TYPE_ATTACH_COMPLETE:

@@ -1,5 +1,5 @@
---- openlte/liblte/src/liblte_rrc.cc	2025-05-27 17:44:15.723612693 +0200
-+++ openlte/liblte/src/liblte_rrc.cc	2025-05-27 17:42:21.530090207 +0200
+--- a/liblte/src/liblte_rrc.cc	2025-05-27 17:44:15.723612693 +0200
++++ b/liblte/src/liblte_rrc.cc	2025-05-27 17:42:21.530090207 +0200
 @@ -11698,13 +11698,28 @@
          liblte_value_2_bits(0, &msg_ptr, 2);
  
@@ -30,14 +30,8 @@
          // Fill in the number of bits used
          msg->N_bits = msg_ptr - msg->msg;
  
---- openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 17:44:15.717612666 +0200
-+++ openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 19:31:55.760090132 +0200
-@@ -1,4 +1,4 @@
--/*******************************************************************************
-+</*******************************************************************************
- 
-     Copyright 2013-2017 Ben Wojtowicz
- 
+--- a/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 17:44:15.717612666 +0200
++++ b/LTE_fdd_enodeb/hdr/LTE_fdd_enb_mme.h	2025-05-27 19:31:55.760090132 +0200
 @@ -105,6 +105,7 @@
  
      // Message Parsers
@@ -54,8 +48,8 @@
      void send_attach_reject(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
      void send_authentication_reject(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
      void send_authentication_request(LTE_fdd_enb_user *user, LTE_fdd_enb_rb *rb);
---- openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-27 17:44:15.717612666 +0200
-+++ openlte/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-27 17:43:41.822457392 +0200
+--- a/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-27 17:44:15.717612666 +0200
++++ a/LTE_fdd_enodeb/hdr/LTE_fdd_enb_rb.h	2025-05-27 17:43:41.822457392 +0200
 @@ -99,18 +99,21 @@
  typedef enum{
      LTE_FDD_ENB_MME_PROC_IDLE = 0,
@@ -86,8 +80,8 @@
                                                                                      "REJECT",
                                                                                      "AUTHENTICATE",
                                                                                      "AUTH REJECTED",
---- openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 17:44:15.718612670 +0200
-+++ openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 19:29:50.434938074 +0200
+--- a/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 17:44:15.718612670 +0200
++++ a/LTE_fdd_enodeb/src/LTE_fdd_enb_mme.cc	2025-05-27 19:29:50.434938074 +0200
 @@ -201,9 +201,13 @@
          case LIBLTE_MME_MSG_TYPE_ATTACH_COMPLETE:
              parse_attach_complete(msg, nas_msg->user, nas_msg->rb);
@@ -191,8 +185,8 @@
      attach_rej.esm_msg_present     = false;
      attach_rej.t3446_value_present = false;
      liblte_mme_pack_attach_reject_msg(&attach_rej, &msg);
---- openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-27 17:44:15.718612670 +0200
-+++ openlte/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-27 17:42:21.528090197 +0200
+--- a/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-27 17:44:15.718612670 +0200
++++ b/LTE_fdd_enodeb/src/LTE_fdd_enb_radio.cc	2025-05-27 17:42:21.528090197 +0200
 @@ -1,4 +1,4 @@
 -#line 2 "LTE_fdd_enb_radio.cc" // Make __FILE__ omit the path
 +// Make __FILE__ omit the path

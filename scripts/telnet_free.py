@@ -140,7 +140,7 @@ async def main():
 
         reply.append(c)
 
-    writer.write("write tracking_area_code 6601\n")
+    writer.write("write tracking_area_code 6602\n")
 
     while True:
         c = await reader.read(1)

@@ -1,0 +1,42 @@
+choice
+prompt "Network interface"
+        default interface
+        help
+          Specify the interface you will use to forward internet with OSMOCOM
+config lo
+        bool
+        prompt "Interface lo"
+        select interface
+config enp114s0
+        bool
+        prompt "Interface enp114s0"
+        select interface
+config wlp0s20f3
+        bool
+        prompt "Interface wlp0s20f3"
+        select interface
+config br-ca5527804f37
+        bool
+        prompt "Interface br-ca5527804f37"
+        select interface
+config br-ce198aad6da1
+        bool
+        prompt "Interface br-ce198aad6da1"
+        select interface
+config br-e5d6da43ca7b
+        bool
+        prompt "Interface br-e5d6da43ca7b"
+        select interface
+config docker0
+        bool
+        prompt "Interface docker0"
+        select interface
+config br-439b5b708b58
+        bool
+        prompt "Interface br-439b5b708b58"
+        select interface
+config br-4b6226f66c16
+        bool
+        prompt "Interface br-4b6226f66c16"
+        select interface
+endchoice

@@ -4,7 +4,7 @@
 #
 
 echo "Have fun..."
-sudo docker run -it -v /dev:/dev --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2gapp bash
+sudo docker run -it -v /dev:/dev --privileged --device /dev/bus/usb:/dev/bus/usb -v /dev:/dev redirect_4_2g-app bash
 pushd $(dirname $0) > /dev/null
 MYPATH=$PWD
 popd > /dev/null

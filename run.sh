@@ -45,11 +45,11 @@ cd $MYPATH
 rm interface
 
 # Put gateway IP in /etc/resolv.conf
-#echo $(ip r | grep ^def | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
-#route=$(sed 's/ .*//g' route)
-#cat <<EOF > /etc/resolv.conf
-#nameserver $route
-#EOF
+echo $(ip r | grep ^def | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+') > route
+route=$(sed 's/ .*//g' route)
+cat <<EOF > /etc/resolv.conf
+nameserver $route
+EOF
 
 #sudo ip r add 192.168.1.23 via 176.16.32.0
 sudo bash dns_forward.sh

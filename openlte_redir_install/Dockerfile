@@ -14,23 +14,28 @@ RUN apt install -y build-essential libgmp-dev libx11-6 libx11-dev\
  bison libgmp3-dev alsa-oss asn1c libdbd-sqlite3 libboost1.65-all-dev libusb-1.0-0-dev\
  python3-mako python-mako doxygen python3-docutils cmake build-essential g++\
  python-cheetah libpython-dev python3-numpy python3-numpy swig libsqlite3-dev libi2c-dev python-numpy\
- libwxgtk3.0-gtk3-dev freeglut3-dev composer phpunit python3-pip python-pip curl wget software-properties-common
-
+ libwxgtk3.0-gtk3-dev freeglut3-dev composer phpunit python3-pip python-pip curl
 RUN pip install requests
 
 
 #4G Redirect
 
 
+#Clone or download the necessary repositories :
 
 RUN git clone https://github.com/ettusresearch/uhd
-RUN cd uhd/host && git checkout release_003_009_000 && mkdir build && cd build && cmake -DENABLE_PYTHON3=OFF .. && make -j16 && make install && ldconfig
+RUN cd uhd/host && git checkout v3.15.0.0-rc3 && mkdir build && cd build && cmake -DENABLE_PYTHON3=OFF .. && make -j16 && make install && ldconfig
+RUN apt install wget software-properties-common -y
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | apt-key add -
+RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+RUN apt-get update
+RUN apt install cmake -y
 
 RUN git clone https://github.com/nuand/BladeRF
 RUN cd BladeRF && git checkout libbladeRF_v2.4.1 && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
 RUN git clone https://github.com/pothosware/SoapySDR
-RUN cd SoapySDR && git checkout soapy-sdr-0.8.0  && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
+RUN cd SoapySDR && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig
 
 RUN git clone https://github.com/pothosware/SoapyBladeRF
 RUN cd SoapyBladeRF && mkdir build && cd build && cmake .. && make -j$N && make install && ldconfig

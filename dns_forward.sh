@@ -1,4 +1,3 @@
-iptables -t mangle -F
 iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
 iptables -P FORWARD ACCEPT
@@ -7,10 +6,16 @@ iptables -X
 iptables -t nat -F
 iptables -t nat -X
 iptables -t mangle -F
-#iptables -t nat -I PREROUTING -i enp114s0 --src 192.168.1.1/24 --dst 172.16.32.0 
-#iptables -t nat -I PREROUTING -i apn0 -p udp --dport 53 -j DNAT --to-dest 1.1.1.1
+iptables -t mangle -X
 iptables -t nat -A POSTROUTING -o enp114s0 -j MASQUERADE
+ip6tables -P INPUT ACCEPT
+ip6tables -P OUTPUT ACCEPT
+ip6tables -P FORWARD ACCEPT
+ip6tables -F
+ip6tables -X
+ip6tables -t nat -F
+ip6tables -t nat -X
+ip6tables -t mangle -F
+ip6tables -t mangle -X
+ip6tables -t nat -A POSTROUTING -o enp114s0 -j MASQUERADE
 echo 1 > /proc/sys/net/ipv4/ip_forward
-sysctl -w net.ipv6.conf.all.disable_ipv6=1
-sysctl -w net.ipv6.conf.default.disable_ipv6=1
-sysctl -w net.ipv6.conf.lo.disable_ipv6=1

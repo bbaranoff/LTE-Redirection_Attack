@@ -8,8 +8,6 @@
 
 
 
-[build](https://youtu.be/0aruLybY__w)
-
 # LTE-Redirection_Attack
 
 To be more transparent I don't even know if it is still working, I am alone in this project and testing is sometime right or othertimes wrong.
@@ -22,6 +20,9 @@ Force target victim to unsafe network
 
 
 Tested on ubuntu 22.04
+
+
+[build](https://youtu.be/0aruLybY__w)
 
 ## Build
 ```bash

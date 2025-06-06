@@ -1,3 +1,13 @@
+# USELESS UNTIL NEW DEVELOPMENTS SEE A SOFTWARE-DEFINED-RADIO.COM
+
+
+[SOFTWARE-DEFINED-RADIO.COM](https://software-defined-radio.com)
+
+
+
+
+
+
 [build](https://youtu.be/0aruLybY__w)
 
 # LTE-Redirection_Attack
